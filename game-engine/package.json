@@ -1,0 +1,19 @@
+{
+  "name": "advanced-game-engine",
+  "version": "1.0.0",
+  "description": "An advanced 2D game engine for web browsers",
+  "main": "dist/game-engine.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.50.0",
+    "webpack-cli": "^4.8.0"
+  }
+}
