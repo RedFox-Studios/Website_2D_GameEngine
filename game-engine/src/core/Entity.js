@@ -5,29 +5,29 @@ class Entity {
     this.position = new Vector2D(config.x || 0, config.y || 0);
     this.velocity = new Vector2D(0, 0);
     this.acceleration = new Vector2D(0, 0);
+    this.width = config.width || 0;
+    this.height = config.height || 0;
     this.rotation = 0;
-    this.scale = new Vector2D(1, 1);
-    this.sprite = null;
-    this.collider = null;
+    this.shape = null;
   }
 
   update(deltaTime) {
-    this.velocity.add(this.acceleration.multiply(deltaTime));
-    this.position.add(this.velocity.multiply(deltaTime));
+    // This method can be overridden by child classes
+  }
+
+  fixedUpdate(fixedDeltaTime) {
+    this.velocity.add(this.acceleration.multiply(fixedDeltaTime));
+    this.position.add(this.velocity.multiply(fixedDeltaTime));
   }
 
   render(ctx) {
-    if (this.sprite) {
-      this.sprite.draw(ctx, this.position, this.rotation, this.scale);
+    if (this.shape) {
+      this.shape.draw(ctx, this.position, this.rotation);
     }
   }
 
-  setSprite(sprite) {
-    this.sprite = sprite;
-  }
-
-  setCollider(collider) {
-    this.collider = collider;
+  setShape(shape) {
+    this.shape = shape;
   }
 }
 

@@ -14,8 +14,7 @@ project-root/
 │   │   │   └── Vector2D.js
 │   │   ├── rendering/
 │   │   │   ├── Renderer.js
-│   │   │   ├── Sprite.js
-│   │   │   └── ParticleSystem.js
+│   │   │   └── Shape.js
 │   │   ├── audio/
 │   │   │   └── AudioManager.js
 │   │   ├── ui/
@@ -26,20 +25,16 @@ project-root/
 │   │   │   └── MathUtils.js
 │   │   ├── state/
 │   │   │   └── StateManager.js
-│   │   ├── tilemap/
-│   │   │   └── TilemapManager.js
 │   │   └── GameEngine.js
 │   ├── dist/
 │   │   └── game-engine.js
 │   ├── package.json
 │   └── webpack.config.js
 │
-├── examples/
-│   └── simple-platformer/
-│       ├── assets/
-│       │   ├── player.png
-│       │   ├── tileset.png
-│       │   ├── background_music.mp3
-│       │   └── jump_sound.wav
-│       ├── game.js
-│       └── index.html
+└── examples/
+    └── simple-platformer/
+        ├── assets/
+        │   ├── background_music.mp3
+        │   └── jump_sound.wav
+        ├── game.js
+        └── index.html

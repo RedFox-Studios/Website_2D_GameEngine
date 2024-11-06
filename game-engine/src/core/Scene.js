@@ -24,6 +24,14 @@ class Scene {
     this.camera.update(deltaTime);
   }
 
+  fixedUpdate(fixedDeltaTime) {
+    for (const entity of this.entities) {
+      if (entity.fixedUpdate) {
+        entity.fixedUpdate(fixedDeltaTime);
+      }
+    }
+  }
+
   render(ctx) {
     ctx.save();
     this.camera.apply(ctx);

@@ -6,20 +6,27 @@ class Camera {
     this.width = width;
     this.height = height;
     this.zoom = 1;
-  }
-
-  update(deltaTime) {
-    // Camera movement logic can be added here
-  }
-
-  apply(ctx) {
-    ctx.translate(-this.position.x + this.width / 2, -this.position.y + this.height / 2);
-    ctx.scale(this.zoom, this.zoom);
+    this.target = null;
+    this.smoothFactor = 0.1;
   }
 
   follow(entity) {
-    this.position.x = entity.position.x;
-    this.position.y = entity.position.y;
+    this.target = entity;
+  }
+
+  update(deltaTime) {
+    if (this.target) {
+      const targetX = this.target.position.x - this.width / 2;
+      const targetY = this.target.position.y - this.height / 2;
+      
+      this.position.x += (targetX - this.position.x) * this.smoothFactor;
+      this.position.y += (targetY - this.position.y) * this.smoothFactor;
+    }
+  }
+
+  apply(ctx) {
+    ctx.translate(-this.position.x, -this.position.y);
+    ctx.scale(this.zoom, this.zoom);
   }
 }
 

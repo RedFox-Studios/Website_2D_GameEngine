@@ -1,42 +1,44 @@
-import Scene from './Scene.js';
-
 class Engine {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
     this.ctx = this.canvas.getContext('2d');
-    this.scenes = [];
-    this.activeScene = null;
     this.systems = [];
+    this.activeScene = null;
     this.lastTime = 0;
-    this.deltaTime = 0;
+    this.accumulator = 0;
+    this.fixedTimeStep = 1 / 60; // 60 updates per second
   }
 
   addSystem(system) {
     this.systems.push(system);
   }
 
-  createScene(sceneConfig) {
-    const scene = new Scene(sceneConfig);
-    this.scenes.push(scene);
-    return scene;
-  }
-
   setActiveScene(scene) {
     this.activeScene = scene;
   }
 
-  update(timestamp) {
-    this.deltaTime = (timestamp - this.lastTime) / 1000;
-    this.lastTime = timestamp;
+  update(deltaTime) {
+    this.accumulator += deltaTime;
+
+    while (this.accumulator >= this.fixedTimeStep) {
+      this.fixedUpdate(this.fixedTimeStep);
+      this.accumulator -= this.fixedTimeStep;
+    }
 
     for (const system of this.systems) {
       if (system.update) {
-        system.update(this.deltaTime);
+        system.update(deltaTime);
       }
     }
 
     if (this.activeScene) {
-      this.activeScene.update(this.deltaTime);
+      this.activeScene.update(deltaTime);
+    }
+  }
+
+  fixedUpdate(fixedDeltaTime) {
+    if (this.activeScene) {
+      this.activeScene.fixedUpdate(fixedDeltaTime);
     }
   }
 
@@ -46,12 +48,22 @@ class Engine {
     if (this.activeScene) {
       this.activeScene.render(this.ctx);
     }
+
+    for (const system of this.systems) {
+      if (system.render) {
+        system.render(this.ctx);
+      }
+    }
   }
 
   start() {
-    const gameLoop = (timestamp) => {
-      this.update(timestamp);
+    const gameLoop = (currentTime) => {
+      const deltaTime = (currentTime - this.lastTime) / 1000;
+      this.lastTime = currentTime;
+
+      this.update(deltaTime);
       this.render();
+
       requestAnimationFrame(gameLoop);
     };
 
