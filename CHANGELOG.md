@@ -5,6 +5,23 @@ All notable changes to the RedFox Studios 2D Game Engine will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2024-11-06
+
+### Added
+- New ErrorHandler utility for capturing and logging errors
+  - Adds timestamp and context to error logs
+  - Provides wrappers for both synchronous and asynchronous functions
+  - Integrated into GameEngine and Engine classes for comprehensive error catching
+- Error logs now appear in the JavaScript console with detailed information
+
+### Changed
+- Updated GameEngine.js to use new ErrorHandler for all methods
+- Modified Engine.js to incorporate ErrorHandler in the game loop and all major methods
+
+### Technical
+- Improved debugging capabilities with more informative error messages
+- Enhanced error traceability across the engine's core components
+
 ## [1.0.0] - 2024-11-06
 
 ### Added
