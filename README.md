@@ -314,4 +314,4 @@ For support, please open an issue in the GitHub repository or contact us through
 
 ---
 
-Made with ❤️ by [RedFox Studios](https://github.com/RedFox-Studios)
+Made with ❤️ by [RedFox Studios](https://github.com/RedFox-Studios).
